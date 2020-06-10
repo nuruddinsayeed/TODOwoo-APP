@@ -5,6 +5,11 @@
 logged in as {{ user.username }}
 <a href="#">Logout</a>
 
+<form action="{% url 'logout' %}" method="post">
+    <button type="submit">Logout</button>
+
+</form>
+
 {% else %}
 
 <a href="#">Sign Up</a>
