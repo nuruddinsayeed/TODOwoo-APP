@@ -5,4 +5,14 @@
 
 <h1>Current</h1>
 
+<ul>
+    {% for todo in todos %}
+        <li>
+            {% if todo.importent %} <b> {% endif %}
+            {{ todo }}
+            {% if todo.import %} </b> {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
 {% endblock %}
