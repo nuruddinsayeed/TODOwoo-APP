@@ -8,9 +8,12 @@
 <ul>
     {% for todo in todos %}
         <li>
-            {% if todo.importent %} <b> {% endif %}
-            {{ todo }}
-            {% if todo.import %} </b> {% endif %}
+            <a href="{% url 'todoView' todo.id %}">
+                {% if todo.importent %} <b> {% endif %}
+                {{ todo }}
+                {% if todo.importent %} </b> {% endif %}
+            </a>
+            {% if todo.memo %} - {{ todo.memo }} {% endif %}
         </li>
     {% endfor %}
 </ul>
