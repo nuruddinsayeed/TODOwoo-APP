@@ -5,4 +5,4 @@ class TodoForm(ModelForm):
 
     class Meta:
         model = Todo
-        fields = ['title', 'memo', 'importent']
+        fields = ['title', 'memo', 'important']
