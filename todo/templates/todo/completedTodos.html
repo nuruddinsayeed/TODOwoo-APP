@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<h1>Current</h1>
+<h1>Completed</h1>
 
 <ul>
     {% for todo in todos %}
         <li>
-            <a href="{% url 'todoView' todo.id %}">
-                {% if todo.importent %} <b> {% endif %}
+            <a href="{% url 'completedTodos' todo.id %}">
+                {% if todo.importent %}<b>{% endif %}
                     {{ todo }}
-                {% if todo.importent %} </b> {% endif %}
+                {% if todo.importent %}</b>{% endif %}
             </a>
             {% if todo.memo %} - {{ todo.memo }} {% endif %}
         </li>
