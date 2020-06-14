@@ -106,4 +106,4 @@ def deleteTodo(request, todo_pk):
     if request.method == "POST":
         todo.delete()
 
-        return redirect('currenttodos ')
+        return redirect('currenttodos')

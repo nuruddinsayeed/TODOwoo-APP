@@ -7,12 +7,13 @@
 <ul>
     {% for todo in todos %}
         <li>
-            <a href="{% url 'completedTodos' todo.id %}">
+            <a href="{% url 'todoView' todo.id %}">
                 {% if todo.importent %}<b>{% endif %}
                     {{ todo }}
                 {% if todo.importent %}</b>{% endif %}
             </a>
             {% if todo.memo %} - {{ todo.memo }} {% endif %}
+            {{ todo.dateCompleted|date:'M j Y H:i' }}
         </li>
     {% endfor %}
 </ul>
