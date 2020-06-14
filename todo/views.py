@@ -6,6 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from .forms import TodoForm
 from .models import Todo
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'todo/home.html')
@@ -42,7 +43,7 @@ def signupuser(request):
             return render(request, 'todo/signupuser.html', {'form' : UserCreationForm(), 'error' : 'Password did not match'})
 
 
-
+@login_required
 def currenttodos(request):
 
     todos = Todo.objects.filter(user = request.user, dateCompleted__isnull = True )
@@ -54,12 +55,14 @@ def logoutuser(request):
     return redirect('home')
 
 
+@login_required
 def completedTodos(request):
-    todos = Todo.objects.filter(user = request.user, dateCompleted__isnull = False)
+    todos = Todo.objects.filter(user = request.user, dateCompleted__isnull = False).order_by('-dateCompleted')
     return render(request, 'todo/completedTodos.html', {'todos' : todos})
 
 
 #ToDos
+@login_required
 def createtodo(request):
     if request.method == "GET":
         return render(request, 'todo/createtodo.html', {'form' : TodoForm()})
@@ -74,6 +77,7 @@ def createtodo(request):
             return render(request, 'todo/createtodo.html', {'form' : TodoForm(), 'error' : 'Bad data passed in. Please try again'})
 
 
+@login_required
 def todoView(request, todo_pk):
 
     todo = get_object_or_404(Todo, pk = todo_pk, user = request.user)
@@ -89,6 +93,7 @@ def todoView(request, todo_pk):
             render(request, 'todo/viewTodo.html', {'todo' : todo, 'form' : form, 'error' : "Bad Information"})
 
 
+@login_required
 def completeTodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk = todo_pk, user = request.user)
 
@@ -99,7 +104,7 @@ def completeTodo(request, todo_pk):
         return redirect('currenttodos')
 
 
-
+@login_required
 def deleteTodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk = todo_pk, user = request.user)
 
